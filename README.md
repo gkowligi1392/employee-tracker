@@ -8,6 +8,8 @@ This project manages employee from a MySql database. Can currently add, view, an
 
 <p align="center"><img src="./assets/images/screen.png" width="70%"></p>
 
+[View Walkthrough Video](https://youtu.be/K1pRASI2gwI)
+
 ## Table of Contents
 
 - [Usage](#usage)
@@ -25,11 +27,11 @@ You can participate in this project, submitting bugs, and feature request. Also 
 
 ## Questions
 
-For any questions feel free to contact me at g@gmail.com
+For any questions feel free to contact me at gkowligi@gmail.com
 
 Checkout my [GitHub profile](https://github.com/gkowligi1392)
 
 ## License
 
 Code released under the MIT License [License](https://choosealicense.com/licenses/mit/).
-for additional questions please feel free to contact us via email at g@gmail.com
+for additional questions please feel free to contact us via email at gkowligi@gmail.com

@@ -26,51 +26,74 @@ const {
     insertEmployee,
     updateEmployee,
     updateRole,
+    deleteEmployee,
 } = require("../db/connection");
 
 function askOptions() {
     inquirer
         .prompt(options)
         .then((answer) => {
-        console.log(answer);
-        switch (answer.option) {
-            case "View All Departments":
-            console.clear();
-            getDeparments().then((departments) => {
-                printDataTable("Departments", departments);
-                return askOptions();
-            });
-            break;
-            case "View All Roles":
-            console.clear();
-            getRoles().then((roles) => {
-                printDataTable("Roles", roles);
-                return askOptions();
-            });
-            break;
-            case "View All Employees":
-            console.clear();
-            getEmployees().then((employees) => {
-                printDataTable("Employees", employees);
-                return askOptions();
-            });
-            break;
-            case "Add a Department":
-            console.clear();
-            return createDepartment();
-            case "Add a Role":
-            console.clear();
-            return createRole();
-            case "Add an Employee":
-            console.clear();
-            return createEmployee();
-            case "Update an Employee":
-            console.clear();
-            return update_Employee();
-            case "Update a Role":
-            console.clear();
-            return update_Role();
-        }
+            console.log(answer);
+            switch (answer.option) {
+                case "View All Departments":
+                    console.clear();
+                    getDeparments().then((departments) => {
+                        printDataTable("Departments", departments);
+                        return askOptions();
+                    });
+                break;
+                case "View All Roles":
+                    console.clear();
+                    getRoles().then((roles) => {
+                        printDataTable("Roles", roles);
+                        return askOptions();
+                    });
+                break;
+                case "View All Employees":
+                    console.clear();
+                    getEmployees().then((employees) => {
+                        printDataTable("Employees", employees);
+                        return askOptions();
+                    });
+                break;
+                case "Add a Department":
+                    console.clear();
+                    return createDepartment();
+                case "Add a Role":
+                    console.clear();
+                    return createRole();
+                case "Add an Employee":
+                    console.clear();
+                    return createEmployee();
+                case "Delete an Employee":
+                    console.clear();
+                    return delete_Employee();
+                case "Update an Employee":
+                    console.clear();
+                    return update_Employee();
+                case "Update a Role":
+                    console.clear();
+                    return update_Role();
+            }
+        })
+        .catch((err) => console.error(err));
+}
+
+// Delete an employee
+function delete_Employee() {
+    let employeeId = 0;
+    getEmployees()
+        .then((employees) => {
+            const employeeQuestion = createEmployeeQuestionList(employees);
+            return inquirer.prompt(employeeQuestion);
+        })
+        .then((answer) => {
+            //Select the employee to delete
+            employeeId = answer.employee_id;
+            return deleteEmployee(employeeId);
+        })
+        .then((result) => {
+            return askOptions();
         })
         .catch((err) => console.error(err));
 }
